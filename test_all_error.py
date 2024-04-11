@@ -1,13 +1,16 @@
-#отслеживание всех статус кодов от сервера
-
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from seleniumwire import webdriver as wiredriver
-import pyautogui
 
-driver = wiredriver.Chrome()
+@pytest.fixture(scope="module")
+def browser():
+    driver = wiredriver.Chrome()
+    yield driver
+    driver.quit()
 
-try:
+def test_check_status_codes(browser):
+    driver = browser
     driver.get("https://avtoelon.uz")
 
     # Нахождение и открытие раздела "Машины"
@@ -39,7 +42,3 @@ try:
         if success:
             print("  Код ответа с сервера: 200")
         print("==========================================")
-
-finally:
-    driver.quit()
-

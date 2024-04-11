@@ -1,3 +1,5 @@
+#проверка последнего кода от сервера при переходе в категории
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from seleniumwire import webdriver as wiredriver
